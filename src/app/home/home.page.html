@@ -28,13 +28,13 @@
 </ion-grid>
 
 <ion-content *ngIf="cs.usernameSet">
-  <ion-list class="message-list">
-    <ion-item *ngFor="let message of messages">
-      <ion-label>
-        <b>{{ message.username }}:</b>
-        {{ message.content }}
-      </ion-label>
-    </ion-item>
+  <ion-list class="message-list" style="overflow-y: scroll;">
+      <ion-item *ngFor="let message of messages">
+        <ion-label>
+          <b>{{ message.username }}:</b>
+          {{ message.content }}
+        </ion-label>
+      </ion-item>
   </ion-list>
   <ion-footer>
     <ion-toolbar>

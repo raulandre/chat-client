@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Message from 'src/app/models/message.model';
 import { ChatService } from '../services/chat.service';
 
@@ -9,7 +8,6 @@ import { ChatService } from '../services/chat.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   private userCount: number;
   private messages: Message[];
   public message = '';
@@ -25,9 +23,6 @@ export class HomePage {
 
     this.cs.conn.on('NewMessage', (message) => {
       this.messages.push(message);
-      if (this.messages.length >= 18) {
-        this.messages.shift();
-      }
     })
   }
 
