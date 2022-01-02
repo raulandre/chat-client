@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <img src="../../assets/icon/favicon.png" slot="start" class="toolbar-icon ion-padding-start">
     <ion-title slot="start">
-      SignalR Chat ({{ userCount }})
+      SignalR Chat <ion-badge color="primary">{{ userCount }}</ion-badge>
     </ion-title>
     <ion-button slot="end" *ngIf="cs.usernameSet" (click)="cs.clearUsername()" fill="outline">Change Username</ion-button>
   </ion-toolbar>
