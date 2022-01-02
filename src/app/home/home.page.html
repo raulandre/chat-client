@@ -1,41 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title slot="start">
-      SignalR Chat
+      SignalR Chat ({{ userCount }})
     </ion-title>
+    <ion-button slot="end" *ngIf="cs.usernameSet" (click)="cs.clearUsername()" fill="outline">Change Username</ion-button>
   </ion-toolbar>
-  <ion-progress-bar type="indeterminate" *ngIf="!connected"></ion-progress-bar>
+  <ion-progress-bar type="indeterminate" *ngIf="!cs.connected"></ion-progress-bar>
 </ion-header>
 
-<ion-grid class="ion-text-center" *ngIf="!usernameSet && connected">
+<ion-grid class="ion-text-center" *ngIf="!cs.usernameSet && cs.connected">
   <ion-row>
-    <ion-col class="ion-text-center">
+    <ion-col>
       <ion-title>New here?</ion-title>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col class="ion-text-center">
-      <ion-text>Please tell us your username: </ion-text>
+    <ion-col>
+      <ion-text>Please tell us your username:</ion-text>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-input placeholder="Username goes here..." type="text" (keyup.enter)="setUsername()" [(ngModel)]="username">
-      </ion-input>
+      <ion-input placeholder="Username goes here..." type="text" (keyup.enter)="cs.setUsername()" [(ngModel)]="cs.username"></ion-input>
     </ion-col>
   </ion-row>
 </ion-grid>
 
-<ion-content padding *ngIf="usernameSet">
-  <ion-list style="min-height: 94%; height: 94%; max-height: 94%;">
+<ion-content *ngIf="cs.usernameSet">
+  <ion-list class="message-list">
     <ion-item *ngFor="let message of messages">
-      <ion-label><b>{{ message.username }}:</b> {{ message.content }}</ion-label>
+      <ion-label>
+        <b>{{ message.username }}:</b>
+        {{ message.content }}
+      </ion-label>
     </ion-item>
   </ion-list>
   <ion-footer>
     <ion-toolbar>
-      <ion-input placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message">
-      </ion-input>
+      <ion-input slot="start" placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message"></ion-input>
     </ion-toolbar>
   </ion-footer>
 </ion-content>
