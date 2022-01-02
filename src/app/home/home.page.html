@@ -4,7 +4,7 @@
     <ion-title slot="start">
       SignalR Chat <ion-badge color="primary">{{ userCount }}</ion-badge>
     </ion-title>
-    <ion-button slot="end" *ngIf="cs.usernameSet" (click)="cs.clearUsername()" fill="outline">Change Username</ion-button>
+    <ion-button class="ion-padding-end" slot="end" *ngIf="cs.usernameSet" (click)="cs.clearUsername()" fill="outline">Change Username</ion-button>
   </ion-toolbar>
   <ion-progress-bar type="indeterminate" *ngIf="!cs.connected"></ion-progress-bar>
 </ion-header>
