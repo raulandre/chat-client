@@ -50,6 +50,9 @@ export class HomePage {
   }
 
   private scrollBottom() {
+
+    if(this.ref == null) return;
+
     setTimeout(() => {
       this.ref.nativeElement.scrollTop = this.ref.nativeElement.scrollHeight;
     }, 1);
