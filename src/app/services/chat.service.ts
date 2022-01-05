@@ -44,6 +44,7 @@ export class ChatService {
         if (localStorage.getItem('username')) {
             this.username = localStorage.getItem('username');
             this.usernameSet = true;
+            this.conn.send("UserConnected", this.username);
         }
     }
 
@@ -51,6 +52,7 @@ export class ChatService {
         if(this.username.trim()) {
             localStorage.setItem('username', this.username);
             this.usernameSet = true;
+            this.conn.send("UserConnected", this.username);
         }
     }
 
@@ -61,6 +63,7 @@ export class ChatService {
     }
 
     public clearUsername() {
+        this.conn.send("UserDisconnected", this.username);
         localStorage.removeItem('username');
         this.username = '';
         this.usernameSet = false;

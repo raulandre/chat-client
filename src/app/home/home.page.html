@@ -2,7 +2,7 @@
   <ion-toolbar>
     <img src="../../assets/icon/favicon.png" slot="start" class="toolbar-icon ion-padding-start">
     <ion-title slot="start">
-      SignalR Chat <ion-badge color="primary">{{ userCount }}</ion-badge>
+      SignalR Chat <ion-badge color="success">{{ userCount }}</ion-badge>
     </ion-title>
     <ion-button class="ion-padding-end" slot="end" *ngIf="cs.usernameSet" (click)="cs.clearUsername()" fill="outline">Change Username</ion-button>
   </ion-toolbar>
@@ -28,17 +28,21 @@
 </ion-grid>
 
 <ion-content *ngIf="cs.usernameSet">
-  <ion-list class="message-list" style="overflow-y: scroll;">
+  <ion-list #list class="message-list" style="overflow-y: scroll;">
       <ion-item *ngFor="let message of messages">
-        <ion-label>
+        <ion-label slot="start">
           <b>{{ message.username }}:</b>
           {{ message.content }}
+        </ion-label>
+        <ion-label slot="end">
+          {{ message.timestamp.toLocaleString() }}
         </ion-label>
       </ion-item>
   </ion-list>
   <ion-footer>
     <ion-toolbar>
-      <ion-input slot="start" placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message"></ion-input>
+      <ion-input placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message"></ion-input>
+      <ion-icon slot="end" style="cursor: pointer;" name="send-sharp" class="ion-padding-end" (click)="sendMessage()"></ion-icon>
     </ion-toolbar>
   </ion-footer>
 </ion-content>
