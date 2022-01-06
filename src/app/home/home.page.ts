@@ -8,13 +8,14 @@ import { ChatService } from '../services/chat.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   @ViewChild('list', { read: ElementRef, static: false }) public ref: ElementRef;
 
   public userCount: number;
   public messages: Message[];
   public message = '';
+  public mobile = false;
 
   constructor(public cs: ChatService, public toastCtrl: ToastController) {
     this.cs.conn.on('UserCount', (count) => {
@@ -46,6 +47,9 @@ export class HomePage {
     this.cs.conn.on('UsernameChange', (oldUsername, newUsername) => {
       this.displayToast(`${oldUsername} is now ${newUsername}.`, 'people-sharp', 'medium');
     });
+  }
+  ngOnInit(): void {
+    this.mobile = window.screen.width < 1366;
   }
 
   public sendMessage() {

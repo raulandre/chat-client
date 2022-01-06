@@ -34,7 +34,7 @@
           <b>{{ message.username }}:</b>
           {{ message.content }}
         </ion-label>
-        <ion-label slot="end">
+        <ion-label slot="end" [hidden]="mobile">
           {{ message.timestamp.toLocaleString() }}
         </ion-label>
       </ion-item>
@@ -42,7 +42,7 @@
   <ion-footer>
     <ion-toolbar>
       <ion-input placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message" maxLength="999"></ion-input>
-      <ion-icon slot="end" style="cursor: pointer;" name="send-sharp" class="ion-padding-end" (click)="sendMessage()"></ion-icon>
+      <ion-icon slot="end" style="cursor: pointer;" name="send-sharp" class="ion-padding-end ion-padding-start" (click)="sendMessage()"></ion-icon>
     </ion-toolbar>
   </ion-footer>
 </ion-content>
