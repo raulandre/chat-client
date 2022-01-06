@@ -12,6 +12,8 @@ export class ChatService {
     public username: string;
     public usernameSet: boolean;
 
+    public oldUsername: string;
+
     constructor() {
         this.connect();
     }
@@ -50,9 +52,14 @@ export class ChatService {
 
     public setUsername() {
         if(this.username.trim()) {
+            if(this.oldUsername) {
+                this.conn.send('UsernameChange', this.oldUsername, this.username.trim());
+            }
+            else {
+                this.conn.send("UserConnected", this.username);
+            }
             localStorage.setItem('username', this.username);
             this.usernameSet = true;
-            this.conn.send("UserConnected", this.username);
         }
     }
 
@@ -63,7 +70,8 @@ export class ChatService {
     }
 
     public clearUsername() {
-        this.conn.send("UserDisconnected", this.username);
+        this.oldUsername = this.username;
+        this.conn.send("UsernameChange", this.username);
         localStorage.removeItem('username');
         this.username = '';
         this.usernameSet = false;

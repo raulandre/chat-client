@@ -22,7 +22,7 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-input placeholder="Username goes here..." type="text" (keyup.enter)="cs.setUsername()" [(ngModel)]="cs.username"></ion-input>
+      <ion-input maxLength="20" placeholder="Username goes here..." type="text" (keyup.enter)="cs.setUsername()" [(ngModel)]="cs.username"></ion-input>
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -30,7 +30,7 @@
 <ion-content *ngIf="cs.usernameSet">
   <ion-list #list class="message-list" style="overflow-y: scroll;">
       <ion-item *ngFor="let message of messages">
-        <ion-label slot="start">
+        <ion-label text-wrap>
           <b>{{ message.username }}:</b>
           {{ message.content }}
         </ion-label>
@@ -41,7 +41,7 @@
   </ion-list>
   <ion-footer>
     <ion-toolbar>
-      <ion-input placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message"></ion-input>
+      <ion-input placeholder="Type a message here..." type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message" maxLength="999"></ion-input>
       <ion-icon slot="end" style="cursor: pointer;" name="send-sharp" class="ion-padding-end" (click)="sendMessage()"></ion-icon>
     </ion-toolbar>
   </ion-footer>

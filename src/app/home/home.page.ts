@@ -12,11 +12,11 @@ export class HomePage {
 
   @ViewChild('list', { read: ElementRef, static: false }) public ref: ElementRef;
 
-  private userCount: number;
-  private messages: Message[];
+  public userCount: number;
+  public messages: Message[];
   public message = '';
 
-  constructor(private cs: ChatService, private toastCtrl: ToastController) {
+  constructor(public cs: ChatService, public toastCtrl: ToastController) {
     this.cs.conn.on('UserCount', (count) => {
       this.userCount = count;
     })
@@ -41,6 +41,10 @@ export class HomePage {
 
     this.cs.conn.on('Disconnected', (username) => {
       this.displayToast(`${username} left.`, 'person-remove-sharp', 'danger');
+    });
+
+    this.cs.conn.on('UsernameChange', (oldUsername, newUsername) => {
+      this.displayToast(`${oldUsername} is now ${newUsername}.`, 'people-sharp', 'medium');
     });
   }
 
